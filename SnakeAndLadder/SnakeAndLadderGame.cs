@@ -10,6 +10,8 @@ namespace SnakeAndLadder
         private int noBoardCells = 100;
         private List<BoardCell> boardCells = new List<BoardCell>();
 
+        private Dice dice = new Dice(6);
+
         private BoardCell GoalCell { get { return new BoardCell { Position = boardCells.Count }; } }
 
         public SnakeAndLadderGame(int noBoardCells)
@@ -30,6 +32,23 @@ namespace SnakeAndLadder
             }
         }
 
+        public void PlayGame()
+        {
+            var gameWon = false;
+            while (!gameWon)
+            {
+                gameWon = Move();
+            }
+        }
+
+        public bool Move()
+        {
+            int number = dice.Roll();
+            var token = new Token() { Value = number };
+
+            return MoveToken(token);
+        }
+
         /// <summary>
         /// Move token and update new position
         /// </summary>
@@ -40,9 +59,21 @@ namespace SnakeAndLadder
             if (token == null || token.Value < 1)
                 throw new InvalidOperationException("Invalid token");
 
-            currentPosition = token.Value + currentPosition;
-            if (currentPosition == GoalCell.Position)
+            var newPosition = token.Value + currentPosition;
+
+            Console.WriteLine($"New Position: {currentPosition}");
+            if (newPosition == GoalCell.Position) //we have a winner!
+            {
+                Console.WriteLine("We have a winner");
                 return true;
+            }
+            else if (newPosition > GoalCell.Position)
+            {
+                Console.WriteLine("Game continues");
+                return false;
+            }
+
+            currentPosition = newPosition;
 
             return false;
         }

@@ -7,7 +7,7 @@ namespace SnakeAndLadder.Test
     [TestClass]
     public class GameTest
     {
-        SnakeAndLadderGame game = new SnakeAndLadderGame();
+        SnakeAndLadderGame game = new SnakeAndLadderGame(100);
 
         [TestMethod]
         public void Should_ReturnBool_When_TokenIsMoved()

@@ -13,7 +13,7 @@ namespace SnakeAndLadder.Test
         [TestMethod]
         public void Should_ReturnBool_When_TokenIsMoved()
         {
-            var token = new Token() { Position = 100 };
+            var token = new Token() { Value = 100 };
             var result = game.MoveToken(token);
 
             Assert.IsTrue(result);
@@ -22,9 +22,9 @@ namespace SnakeAndLadder.Test
         [TestMethod]
         public void Should_ThrowException_WhenTokenIsInvalid()
         {
-            var token = new Token() { Position = 0 };
+            var token = new Token() { Value = 0 };
 
-            Assert.ThrowsException<InvalidOperationException>(()=>game.MoveToken(token));
+            Assert.ThrowsException<InvalidOperationException>(() => game.MoveToken(token));
         }
 
 

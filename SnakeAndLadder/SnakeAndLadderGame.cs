@@ -37,10 +37,10 @@ namespace SnakeAndLadder
         /// <returns></returns>
         public bool MoveToken(Token token)
         {
-            if (token == null || token.Position < 1)
+            if (token == null || token.Value < 1)
                 throw new InvalidOperationException("Invalid token");
 
-            currentPosition = token.Position + currentPosition;
+            currentPosition = token.Value + currentPosition;
             if (currentPosition == GoalCell.Position)
                 return true;
 

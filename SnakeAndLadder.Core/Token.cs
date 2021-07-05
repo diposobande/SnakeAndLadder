@@ -2,6 +2,6 @@
 {
     public class Token
     {
-        public int Position { get; set; }
+        public int Value { get; set; }
     }
 }

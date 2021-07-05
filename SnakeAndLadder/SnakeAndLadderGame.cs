@@ -38,9 +38,9 @@ namespace SnakeAndLadder
                 }
                 else
                 {
-                boardCells.Add(new BoardCell() { Position = pos });
+                    boardCells.Add(new BoardCell() { Position = pos });
+                }
             }
-        }
         }
 
         public void PlayGame()
@@ -84,7 +84,16 @@ namespace SnakeAndLadder
                 return false;
             }
 
-            currentPosition = newPosition;
+            var newCell = boardCells[newPosition - 1];
+            if (newCell.CellType == CellType.Snake)
+            {
+                Console.WriteLine($"Token landed on a snake head");
+                currentPosition = newCell.Adjustment;
+            }
+            else
+            {
+                currentPosition = newPosition;
+            }
 
             return false;
         }

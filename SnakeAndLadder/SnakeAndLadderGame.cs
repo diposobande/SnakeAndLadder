@@ -1,6 +1,7 @@
 ﻿using SnakeAndLadder.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SnakeAndLadder
 {
@@ -25,11 +26,21 @@ namespace SnakeAndLadder
         /// </summary>
         public void Setup()
         {
+            var snakeCells = GetSnakeCells();
             for (var i = 0; i < noBoardCells; i++)
             {
                 var pos = i + 1;
+
+                var cell = snakeCells.FirstOrDefault(x => x.Position == pos);
+                if (cell != null)
+                {
+                    boardCells.Add(cell);
+                }
+                else
+                {
                 boardCells.Add(new BoardCell() { Position = pos });
             }
+        }
         }
 
         public void PlayGame()
@@ -78,5 +89,16 @@ namespace SnakeAndLadder
             return false;
         }
 
+        private List<BoardCell> GetSnakeCells()
+        {
+            var snakeCells = new List<BoardCell>() {
+                new BoardCell { Position=98, Adjustment = 40, CellType = CellType.Snake } ,
+                new BoardCell { Position=71, Adjustment = 54, CellType = CellType.Snake } ,
+                new BoardCell { Position=35, Adjustment = 7, CellType = CellType.Snake } ,
+                new BoardCell { Position=23, Adjustment = 2, CellType = CellType.Snake }
+            };
+
+            return snakeCells;
+        }
     }
 }

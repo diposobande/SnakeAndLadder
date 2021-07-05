@@ -3,6 +3,7 @@
     public enum CellType
     {
         Plain, 
-        Snake
+        Snake,
+        Ladder
     }
 }

@@ -27,17 +27,22 @@ namespace SnakeAndLadder
         public void Setup()
         {
             var snakeCells = GetSnakeCells();
+            var ladderCells = GetLadderCells();
+            var snakeAndLadderCells = snakeCells.Concat(ladderCells);
+
             for (var i = 0; i < noBoardCells; i++)
             {
                 var pos = i + 1;
 
-                var cell = snakeCells.FirstOrDefault(x => x.Position == pos);
+                //add a snake or ladder if it exists at the current cell position
+                var cell = snakeAndLadderCells.FirstOrDefault(x => x.Position == pos);
                 if (cell != null)
                 {
                     boardCells.Add(cell);
                 }
                 else
                 {
+                    //add empty cell
                     boardCells.Add(new BoardCell() { Position = pos });
                 }
             }
@@ -108,6 +113,19 @@ namespace SnakeAndLadder
             };
 
             return snakeCells;
+        }
+
+        //Get ladder cells
+        private List<BoardCell> GetLadderCells()
+        {
+            var ladderCells = new List<BoardCell>() {
+                new BoardCell { Position=67, Adjustment = 83, CellType = CellType.Ladder } ,
+                new BoardCell { Position=50, Adjustment = 79 , CellType = CellType.Ladder} ,
+                new BoardCell { Position=21, Adjustment = 69, CellType = CellType.Ladder } ,
+                new BoardCell { Position=5, Adjustment = 20, CellType = CellType.Ladder } ,
+            };
+
+            return ladderCells;
         }
     }
 }

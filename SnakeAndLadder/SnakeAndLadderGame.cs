@@ -90,9 +90,14 @@ namespace SnakeAndLadder
             }
 
             var newCell = boardCells[newPosition - 1];
-            if (newCell.CellType == CellType.Snake)
+            if (newCell.CellType == CellType.Snake )
             {
                 Console.WriteLine($"Token landed on a snake head");
+                currentPosition = newCell.Adjustment;
+            }
+            if (newCell.CellType == CellType.Ladder)
+            {
+                Console.WriteLine($"Token landed on a ladder");
                 currentPosition = newCell.Adjustment;
             }
             else
@@ -103,6 +108,10 @@ namespace SnakeAndLadder
             return false;
         }
 
+        /// <summary>
+        /// Get Ssnakes cells 
+        /// </summary>
+        /// <returns></returns>
         private List<BoardCell> GetSnakeCells()
         {
             var snakeCells = new List<BoardCell>() {
